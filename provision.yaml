@@ -1,0 +1,21 @@
+- name: Create a simple EC2 Web Application
+  hosts: localhost
+  gather_facts: False
+  vars:
+    vpc_id:
+    vpc_subnet_id:
+    security_group_id:
+    private_key:
+    instance_type: m3.medium
+    image: ami-18afc47f
+    region: ap-northeast-1
+  roles:
+    - aws
+
+- name: deploy flask
+  hosts: launched
+  remote_user: ubuntu
+  become: True
+  gather_facts: False
+  roles:
+    - flask
